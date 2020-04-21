@@ -168,10 +168,9 @@ function deploy() {
 
   sleep 2
 
-  local template=cicd-template.yaml
+  local template=https://raw.githubusercontent.com/blues-man/openshift-quay-demo/master/cicd-template.yaml
   echo "Using template $template"
-  oc apply -f $template
-  oc $ARG_OC_OPS process -p DEV_PROJECT=dev-$PRJ_SUFFIX -p STAGE_PROJECT=stage-$PRJ_SUFFIX -p EPHEMERAL=$ARG_EPHEMERAL -p ENABLE_QUAY=$ARG_ENABLE_QUAY -p QUAY_USERNAME=$ARG_QUAY_USER -p QUAY_PASSWORD=$ARG_QUAY_PASS -n cicd-$PRJ_SUFFIX cicd
+  oc $ARG_OC_OPS new-app -f $template -p DEV_PROJECT=dev-$PRJ_SUFFIX -p STAGE_PROJECT=stage-$PRJ_SUFFIX -p EPHEMERAL=$ARG_EPHEMERAL -p ENABLE_QUAY=$ARG_ENABLE_QUAY -p QUAY_USERNAME=$ARG_QUAY_USER -p QUAY_PASSWORD=$ARG_QUAY_PASS -n cicd-$PRJ_SUFFIX 
 }
 
 function make_idle() {
@@ -279,4 +278,3 @@ popd >/dev/null
 
 END=`date +%s`
 echo "(Completed in $(( ($END - $START)/60 )) min $(( ($END - $START)%60 )) sec)"
-in $(( ($END - $START)/60 )) min $(( ($END - $START)%60 )) sec)"

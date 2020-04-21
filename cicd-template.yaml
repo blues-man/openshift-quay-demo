@@ -450,7 +450,7 @@ objects:
             oc label dc gogs "app.kubernetes.io/part-of"="gogs" --overwrite
             oc label dc gogs-postgresql "app.kubernetes.io/part-of"="gogs" --overwrite
 
-          image: quay-1d26.apps.shared-rhpds.rhpds.openshift.opentlc.com/openshift/origin-cli:v4.0
+          image: quay.io/openshift/origin-cli:v4.0
           name: cicd-demo-installer-job
           resources: {}
           terminationMessagePath: /dev/termination-log
